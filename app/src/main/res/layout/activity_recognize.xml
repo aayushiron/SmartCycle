@@ -68,26 +68,26 @@
         android:id="@+id/btnProcess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="14dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginStart="14dp"
-        android:text="Analyze through Cuisines" />
+        android:layout_marginLeft="14dp"
+        android:layout_marginBottom="16dp" />
 
     <TextView
         android:id="@+id/app"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/btnProcess"
-        android:layout_alignParentTop="true"
         android:layout_alignRight="@+id/btnProcess"
-        android:layout_marginTop="118dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="ALLERGTECT"
-        android:textSize="23dp"
-         />
+        android:layout_marginTop="118dp"
+        android:layout_marginEnd="-137dp"
+        android:layout_marginRight="-137dp"
+        android:text="SmartCycle"
+        android:textSize="23dp" />
   </RelativeLayout>
   <android.support.design.widget.FloatingActionButton
       android:id="@+id/fab"

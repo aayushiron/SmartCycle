@@ -2,6 +2,7 @@ package com.clarifai.android.starter.api.v2.activity;
 
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,6 +26,8 @@ import clarifai2.dto.model.output.ClarifaiOutput;
 import clarifai2.dto.prediction.Concept;
 import com.clarifai.android.starter.api.v2.App;
 import com.clarifai.android.starter.api.v2.ClarifaiUtil;
+import com.clarifai.android.starter.api.v2.IntermediateryRecycle;
+import com.clarifai.android.starter.api.v2.IntermediateryTrash;
 import com.clarifai.android.starter.api.v2.R;
 import com.clarifai.android.starter.api.v2.adapter.RecognizeConceptsAdapter;
 
@@ -40,6 +43,7 @@ public final class RecognizeConceptsActivity extends BaseActivity {
 
   public static final int PICK_IMAGE = 100;
   public static final String EXTRA_MESSAGE = "oof";
+
   // the list of results that were returned from the API
   @BindView(R.id.resultsList) RecyclerView resultsList;
 
@@ -101,7 +105,7 @@ public final class RecognizeConceptsActivity extends BaseActivity {
     new AsyncTask<Void, Void, ClarifaiResponse<List<ClarifaiOutput<Concept>>>>() {
       @Override protected ClarifaiResponse<List<ClarifaiOutput<Concept>>> doInBackground(Void... params) {
         // The default Clarifai model that identifies concepts in images
-        final ConceptModel generalModel = App.get().clarifaiClient().getDefaultModels().foodModel();
+        final ConceptModel generalModel = App.get().clarifaiClient().getDefaultModels().generalModel();
 
         // Use this model to predict, with the image that the user just selected as the input
         return generalModel.predict()
@@ -125,17 +129,25 @@ public final class RecognizeConceptsActivity extends BaseActivity {
 
         final String m = concepts.get(0).name();
         Button btn = (Button)findViewById(R.id.btnProcess);
-        btn.setText("Proceed to Allergies");
-        btn.setOnClickListener(new View.OnClickListener() {
+        for (int i = 0; i < concepts.size(); i++) {
+          if (concepts.get(i).name().equals("plastic") || concepts.get(i).name().equals("bottle")) {
+            Intent bois = new Intent(getApplicationContext(), IntermediateryRecycle.class);
+            startActivity(bois);
+          } else {
+            Intent bois = new Intent(getApplicationContext(), IntermediateryTrash.class);
+            startActivity(bois);
+          }
+        }
+        //btn.setText("Proceed to Allergies");
+        /*btn.setOnClickListener(new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-            Intent intent = new Intent(getApplicationContext(), Allergies.class);
-            String message = m;
-            intent.putExtra(EXTRA_MESSAGE, m);
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                    Uri.parse("https://www.google.com/maps/dir/37.3875089,-121.9639485/J+%26+B+Enterprises,+1650+Russell+Ave,+Santa+Clara,+CA+95054/@37.3873844,-121.9626202,17z/data=!3m1!4b1!4m16!1m6!3m5!1s0x0:0xab871ec150ff24d8!2sJ+%26+B+Enterprises!8m2!3d37.3868418!4d-121.9566804!4m8!1m1!4e1!1m5!1m1!1s0x808fc99ace703ce5:0xab871ec150ff24d8!2m2!1d-121.956681!2d37.38684"));
             startActivity(intent);
 
           }
-        });
+        });*/
         adapter.setData(predictions.get(0).data());
         imageView.setImageBitmap(BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length));
       }

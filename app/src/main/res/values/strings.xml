@@ -1,7 +1,7 @@
 <resources>
     <string name="clarifai_api_key">e34b23abc54545b096089e62b0f6ead4</string>
 
-    <string name="app_name">AllergTect</string>
+    <string name="app_name">SmartCycle</string>
 
     <string name="error_external_storage_permission_not_granted">You must accept this permission so we can upload your images!</string>
 

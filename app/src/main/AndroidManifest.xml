@@ -12,6 +12,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".IntermediateryTrash"></activity>
+        <activity android:name=".IntermediateryRecycle" />
         <activity android:name=".activity.RecognizeConceptsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.Allergies"></activity>
+        <activity android:name=".activity.Allergies" />
     </application>
 
 </manifest>
